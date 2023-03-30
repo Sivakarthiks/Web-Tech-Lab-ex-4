@@ -1,0 +1,305 @@
+<html>
+    <head>
+        <title>Validation</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+        <style>
+            .container{
+                margin: auto;
+                width: 600px;
+                border-radius: 5px;
+                box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+                justify-content:center;
+                font-family: Tahoma;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container m-5" style="margin-left: 500px;">
+            <br>
+            <h1 style="text-align: center; background-color:rgb(55, 55, 55); color: white; font-family: Tahoma; border-radius: 5px; padding: 10px;">Course Registration</h1>
+            <img style="margin-left: 150px; margin-top: 20px; margin-bottom: 20px;" src="./images.png" alt="pic">
+            <form style="margin-left: 125px" name="form" onsubmit="return validate()" method="post">
+                <label for="username" class="mt-3 mb-1">Username</label>
+                <input type="text" name="username" class="form-control" style="width: 300px;">
+                <p id="user"></p>
+
+                
+                <label for="pwd" class="mt-2 mb-1">Password</label>
+                <input style="width: 300px;" type="password" name="pwd" class="form-control" title="Password should contain 1 special character,1 number, atleast one letter and it should have minimum of 8 characters">
+                <p id="pwd"></p>
+            
+                <label for="cpwd" class="mt-3 mb-1">Confirm Password</label>
+                <input style="width: 300px;" type="password" name="cpwd" class="form-control">
+                <p id="same"></p>
+
+
+                <div class="mt-3">
+                    <label for="gender">Gender:</label>
+                    <div class="form-check mt-2">
+                        <input type="radio" class="form-check-input" name="gender">Male   
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" name="gender">Female   
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" name="gender">Others  
+                    </div>
+                    <p id="sex"></p>
+                </div>
+
+                <div class="mt-3" >
+                    <label for="dept">Select your Department</label>
+                    <select class="mt-2" name="dept" style="width:100px; margin:10px">
+                        <option value="1">Select</option>
+                        <option value="AI">AI</option>
+                        <option value="CSE">CSE</option>
+                        <option value="IT">IT</option>
+                        <option value="EEE">EEE</option>
+                        <option value="ECE">ECE</option>
+                        <option value="EIE">EIE</option>
+                    </select>
+                    <p id="dpt"></p>
+                </div>
+
+                <div class="mt-3">
+                    <label for="course">Courses Interested</label>
+                    <select class="mt-2" style="margin-left:5px;" name="course" style="width:250px;">
+                        <option value="1" selected>Select the Courses</option>
+                        <option value="EEE">Electrical Safety</option>
+                        <option value="AI">Web Technology</option>
+                        <option value="Auto">Electric vehicles</option>
+                        <option value="Civil">Remote Sensing</option>
+                        <option value="IT">Data Aanlysis</option>
+                    </select>
+                    <p id="crs"></p>
+                </div>
+                
+                <div class="mt-4">
+                    <label for="address">Address</label>
+                    <textarea style="width: 300px;" class="form-control mb-4" name="address" rows="3"></textarea>
+                    <p id="adrs"></p>
+                    <label for="pin">Pincode</label>
+                    <input style="width: 300px;" class="form-control" type="text" name="pin">
+                    <p id="pcode"></p>
+                    <br>
+                    <label for="state">State</label>
+                    <input style="width: 300px;" class="form-control mb-3" type="text" name="state" style="margin-right:150px;">
+                    <p id="st"></p>
+                </div>
+
+                <div class="mt-4">
+                    <label for="phone">Mobile Number</label>
+                    <div class="input-group mt-2" style="width: 300px;">
+                        <span class="input-group-text">+91</span>
+                        <input class="form-control" type="tel" name="phone">
+                    </div>
+                    <p id="ph"></p>
+                </div>
+                <br>
+                <input type="submit" value="Register" class="btn btn-dark mt-3" style="margin-left: 100px;">
+                <br><br>
+            </form>
+        </div>
+        
+    <script>
+        function validate()
+        {
+            var username=document.form.username.value;
+            if(username=='')
+            {
+                document.getElementById('user').innerText="*Fill the username";
+                document.form.username.focus();
+                document.getElementById('user').style.color="#ff0000"
+                document.getElementById('user').style.fontSize="13px"
+                document.getElementById('user').style.paddingTop="5px"
+                return false;
+            }
+            else if(username.length>15 || username.length<8)
+            {
+                document.form.username.focus();
+                document.getElementById('user').innerText="*Username should be atleast 8 characters";
+                document.getElementById('user').style.color="#ff0000"
+                document.getElementById('user').style.fontSize="13px"
+                document.getElementById('user').style.paddingTop="5px"
+
+                return false;
+            }
+            else{
+                document.getElementById('user').innerText="";
+            }
+            var pwd=document.form.pwd.value;
+            var alph = /[A-Z]/.test(pwd);
+            var digit = /\d/.test(pwd);
+            var cpwd=document.form.cpwd.value;
+            if(pwd=='')
+            {
+                document.form.pwd.focus();
+                document.getElementById('pwd').innerText="*Password should not be empty";
+                document.getElementById('pwd').style.color="#ff0000"
+                document.getElementById('pwd').style.fontSize="13px"
+                document.getElementById('pwd').style.paddingTop="5px"
+                return false;
+            }
+            else if(digit == false)
+            {
+                document.getElementById('pwd').innerHTML = "Password must atleast contain a digit";
+                document.form.pwd.focus();
+                document.getElementById('pwd').style.color="#ff0000"
+                document.getElementById('pwd').style.fontSize="13px"
+                document.getElementById('pwd').style.paddingTop="5px"
+                return false;
+            }
+            else if(alph == false)
+            {
+                document.getElementById('pwd').innerHTML = "Password must contain atleast one uppercase letter";
+                document.form.pwd.focus();
+                document.getElementById('pwd').style.color="#ff0000"
+                document.getElementById('pwd').style.fontSize="13px"
+                document.getElementById('pwd').style.paddingTop="5px"
+                return false;
+            }
+            else
+            {
+                document.getElementById('pwd').innerText="";
+            }
+
+            if(cpwd != pwd)
+            {
+                document.form.cpwd.focus();
+                document.getElementById('same').innerText="*Password entered is not same";
+                document.getElementById('same').style.color="#ff0000"
+                document.getElementById('same').style.fontSize="13px"
+                document.getElementById('same').style.paddingTop="5px"
+                return false;
+            }
+            else if(cpwd == "")
+            {
+                document.form.cpwd.focus();
+                document.getElementById('same').innerText="*Enter your confirmed password";
+                document.getElementById('same').style.color="#ff0000"
+                document.getElementById('same').style.fontSize="13px"
+                document.getElementById('same').style.paddingTop="5px"
+                return false;
+            }
+            else
+            {
+                document.getElementById('same').innerText="";   
+            }
+
+            var gender=document.form.gender;
+            for(var i=0;i<gender.length;i++)
+            {
+                if(gender[i].checked==true)
+                {
+                    status=1;
+                    break;
+                }
+            }
+            if(status==0)
+            {
+                document.getElementById('sex').innerText="*Please select your gender";
+                document.getElementById('sex').style.color="#ff0000"
+                document.getElementById('sex').style.fontSize="13px"
+                document.getElementById('sex').style.paddingTop="5px"
+                return false;
+            }
+            else{
+                document.getElementById('sex').innerText=(""); 
+            }
+
+
+            var dept=document.form.dept;
+            for(var i=0;i<dept.length;i++)
+            {
+                if(dept.selectedIndex=='0')
+                {
+                    document.getElementById('dpt').innerText="*Please select your department";
+                    document.getElementById('dpt').style.color="#ff0000"
+                    document.getElementById('dpt').style.fontSize="13px"
+                    document.getElementById('dpt').style.paddingTop="5px"
+                    return false;
+                }
+                else{
+                    document.getElementById('dpt').innerText=("");
+                }
+            }
+
+            var course=document.form.course;
+            for(var i=0;i<course.length;i++)
+            {
+                if(course.selectedIndex=='0')
+                {
+                    document.getElementById('crs').innerText="*Please select the courses you want to enroll";
+                    document.getElementById('crs').style.color="#ff0000"
+                    document.getElementById('crs').style.fontSize="13px"
+                    document.getElementById('crs').style.paddingTop="5px"
+                    return false;
+                }
+                else{
+                    document.getElementById('crs').innerText="";
+                }
+            }
+
+            var add=document.form.address.value;
+            if(add=='')
+            {
+                document.getElementById('adrs').innerText=("*Please enter your address");
+                document.getElementById('adrs').style.color="#ff0000"
+                document.getElementById('adrs').style.fontSize="13px"
+                document.getElementById('adrs').style.paddingTop="5px"
+                return false;
+            }
+            else{
+                document.getElementById('adrs').innerText="";
+            }
+
+            var pin=document.form.pin.value;
+            if(pin=='')
+            {
+                document.getElementById('pcode').innerText="*Please enter your Pincode";
+                document.getElementById('pcode').style.color="#ff0000"
+                document.getElementById('pcode').style.fontSize="13px"
+                document.getElementById('pcode').style.paddingTop="5px"
+                return false;
+            }
+            else if(pin.length>6)
+            {
+                document.getElementById('pcode').innerText="*Please enter a valid pincode";
+                return false;
+            }
+            else{
+                document.getElementById('pcode').innerText="";
+            }
+
+            var state=document.form.state.value;
+            if(state=='')
+            {
+                document.getElementById('st').innerText="*Please enter your state";
+                document.getElementById('st').style.color="#ff0000"
+                document.getElementById('st').style.fontSize="13px"
+                document.getElementById('st').style.paddingTop="5px"
+                return false;
+            }
+            else{
+                document.getElementById('st').innerText="";
+            }
+            
+            var phone=document.form.phone.value;
+            if(phone.length>10 || phone.length<10)
+            {
+                document.getElementById('ph').innerText="*Please enter a valid mobile number";
+                document.getElementById('ph').style.color="#ff0000"
+                document.getElementById('ph').style.fontSize="13px"
+                extdocument.getElementById('ph').style.paddingTop="5px"
+                return false;
+            }
+            else
+            {
+                document.getElementById('ph').innerText="";
+            }
+            return true;
+        }
+    </script>
+    </body>
+</html>
